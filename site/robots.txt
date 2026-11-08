@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://cleftheris.github.io/nikola-web/sitemap.xml

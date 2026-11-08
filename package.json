@@ -1,0 +1,17 @@
+{
+  "name": "nikola-web",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for the dental practice of Dr. Nikola Papageorgopoulou, Argyroupoli (Athens).",
+  "type": "module",
+  "scripts": {
+    "images": "node tools/optimize-images.mjs",
+    "validate": "html-validate \"site/**/*.html\"",
+    "serve": "http-server site -p 8080 -c-1"
+  },
+  "devDependencies": {
+    "html-validate": "^9.0.0",
+    "http-server": "^14.1.1",
+    "sharp": "^0.34.0"
+  }
+}
