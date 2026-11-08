@@ -28,15 +28,22 @@ async function photo({ name, widths }) {
   }
 }
 
-async function portrait() {
-  // Square head-and-shoulders crop of Dr. Nikola for the team section.
+// Square head-and-shoulders crops for the team section (crop box in source pixels).
+const portraits = [
+  { src: 'dr-nikola', out: 'dr-nikola-portrait', crop: { left: 560, top: 240, width: 860, height: 860 } },
+  { src: 'bateli', out: 'bateli-portrait', crop: { left: 50, top: 80, width: 600, height: 600 } },
+  { src: 'karagkiolidou', out: 'karagkiolidou-portrait', crop: { left: 35, top: 100, width: 430, height: 430 } },
+  { src: 'markou', out: 'markou-portrait', crop: { left: 0, top: 250, width: 1280, height: 1280 } },
+];
+
+async function portrait({ src: name, out: outName, crop }) {
   for (const w of [320, 640]) {
-    const base = sharp(path.join(src, 'dr-nikola.jpg'))
+    const base = sharp(path.join(src, `${name}.jpg`))
       .rotate()
-      .extract({ left: 560, top: 240, width: 860, height: 860 })
+      .extract(crop)
       .resize(w, w);
-    await base.clone().webp({ quality: 74 }).toFile(path.join(out, `dr-nikola-portrait-${w}.webp`));
-    await base.clone().jpeg({ quality: 76, mozjpeg: true }).toFile(path.join(out, `dr-nikola-portrait-${w}.jpg`));
+    await base.clone().webp({ quality: 74 }).toFile(path.join(out, `${outName}-${w}.webp`));
+    await base.clone().jpeg({ quality: 76, mozjpeg: true }).toFile(path.join(out, `${outName}-${w}.jpg`));
   }
 }
 
@@ -66,7 +73,7 @@ async function icons() {
 
 await mkdir(out, { recursive: true });
 for (const p of photos) await photo(p);
-await portrait();
+for (const p of portraits) await portrait(p);
 await socialCard();
 await icons();
 console.log('Done.');

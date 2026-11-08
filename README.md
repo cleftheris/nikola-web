@@ -29,9 +29,10 @@ Keep both in sync. When changing practice details, also update:
 - **Opening hours** – the `<tr data-day data-open data-close>` rows (drive the “Open now” badge),
   the hero summary line, and the `openingHoursSpecification` in the JSON‑LD block of both pages.
 - **Phone / address** – visible text, `tel:` links and the JSON‑LD block.
-- **Team photos** – put a square headshot in `tools/source-images/`, add it to
-  `tools/optimize-images.mjs`, run `npm run images`, then replace the initials avatar
-  (`<div class="avatar avatar-2">MB</div>`) with a `<picture>` like the founder’s card.
+- **Team photos** – put the original photo in `tools/source-images/`, add an entry to the
+  `portraits` list in `tools/optimize-images.mjs` (square crop box in source pixels),
+  run `npm run images`, then copy an existing team card’s `<picture>` and point it to the
+  new `*-portrait-320/640` files.
 
 ## Local development
 
