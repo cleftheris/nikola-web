@@ -358,6 +358,9 @@ a:hover { color: var(--accent); }
   -webkit-background-clip: text;
   background-clip: text;
   color: transparent;
+  /* Italic glyphs (e.g. Greek "ς") overhang the box; extend the painted area so they aren't clipped */
+  padding-inline-end: 0.15em;
+  margin-inline-end: -0.15em;
 }
 .hero .lead {
   max-width: 560px;
